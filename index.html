@@ -77,36 +77,6 @@
     }
     .nav-menu a:hover { color: var(--accent); }
 
-    .dropdown { position: relative; padding: 10px 0; }
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 12px 0;
-        min-width: 220px;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        list-style: none;
-    }
-    .dropdown:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-    }
-    .dropdown-menu li a {
-        display: block;
-        padding: 10px 20px;
-        font-weight: 400;
-        font-size: 0.9rem;
-    }
-    .dropdown-menu li a:hover { background: rgba(0,0,0,0.05); }
-
     /* ===== БЛОК 1: ГЕРОЙ С ТРАНСЛЯЦИЕЙ ===== */
     .hero-live {
         position: relative;
@@ -228,6 +198,78 @@
     .schedule-card-title { font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
     .schedule-card-sub { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
 
+    /* ===== БЛОК ПРОГРАММА (Старый дизайн) ===== */
+    .tabs {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        padding: 14px 32px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .tab-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(230,57,70,0.4);
+    }
+    .schedule-container {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 20px;
+    }
+    .schedule-container::before {
+        content: '';
+        position: absolute;
+        left: 31px;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        background-image: linear-gradient(to bottom, var(--accent) 50%, transparent 50%);
+        background-size: 2px 10px;
+    }
+    .schedule-item {
+        display: flex;
+        align-items: stretch;
+        gap: 24px;
+        margin-bottom: 24px;
+        position: relative;
+    }
+    .schedule-marker {
+        width: 24px;
+        height: 24px;
+        background: var(--bg);
+        border: 3px solid var(--accent);
+        border-radius: 50%;
+        margin-top: 24px;
+        flex-shrink: 0;
+        z-index: 2;
+    }
+    .schedule-content {
+        flex: 1;
+        padding: 24px 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+    }
+    .schedule-time { font-size: 0.9rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; }
+    .schedule-title { font-size: 1.1rem; font-weight: 600; line-height: 1.4; color: var(--text); }
+
     /* ===== ПАРТНЁРЫ ===== */
     .partners-stack { display: flex; flex-direction: column; gap: 24px; }
     .partners-block { padding: 40px; }
@@ -280,18 +322,22 @@
         transition: transform 0.3s, box-shadow 0.3s;
     }
     .distract-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
-    .distract-card img { width: 100px; height: 100px; object-fit: contain; }
+    .distract-emoji {
+        font-size: 4rem;
+        line-height: 1;
+        filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
     .distract-card span { font-size: 1.05rem; font-weight: 700; }
 
-    /* ===== ПОЛЕЗНОЕ (КАРУСЕЛЬ БАННЕРОВ) ===== */
+    /* ===== ВАМ БУДЕТ ПОЛЕЗНО (КАРУСЕЛЬ) ===== */
     .useful-section { overflow: hidden; }
     .useful-carousel {
         position: relative;
         width: 100vw;
         left: 50%;
         transform: translateX(-50%);
-        height: 60vh;
-        min-height: 320px;
+        height: 30vh;
+        min-height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -301,7 +347,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 60%;
+        width: 50%;
         height: 100%;
         border-radius: 24px;
         overflow: hidden;
@@ -315,25 +361,20 @@
         align-items: center;
         justify-content: center;
     }
-    .banner-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
     .banner-slide .banner-content {
-        padding: 60px;
+        padding: 30px;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
         width: 100%;
         height: 100%;
         color: #fff;
     }
-    .banner-slide .banner-content h3 { font-size: 2rem; font-weight: 900; line-height: 1.2; }
-    .banner-slide .banner-content p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; }
+    .banner-slide .banner-content h3 { font-size: 1.4rem; font-weight: 900; line-height: 1.2; }
+    .banner-slide .banner-content p { font-size: 0.95rem; opacity: 0.9; max-width: 600px; }
 
     /* Позиции в карусели */
     .banner-slide.pos-center {
@@ -401,12 +442,12 @@
         aspect-ratio: 1;
         border-radius: 16px;
         object-fit: cover;
-        background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
+        background: #e0e0e0;
     }
     .team-text h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; }
     .team-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
 
-    /* ===== FAQ (без изменений стиля) ===== */
+    /* ===== FAQ ===== */
     .faq-wrap { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
     .faq-item {
         border-radius: 16px; overflow: hidden; transition: 0.3s;
@@ -447,7 +488,6 @@
 
     /* ===== АДАПТИВ ===== */
     @media (max-width: 1024px) {
-        .speakers-grid { grid-template-columns: repeat(3, 1fr); }
         .partners-logos { grid-template-columns: repeat(4, 1fr); }
         .distract-grid { grid-template-columns: repeat(3, 1fr); }
     }
@@ -462,10 +502,14 @@
         .distract-grid { grid-template-columns: 1fr; }
         .footer-top { flex-direction: column; gap: 20px; }
         .footer-nav { flex-wrap: wrap; justify-content: center; }
+        .banner-slide { width: 80%; }
     }
     @media (max-width: 520px) {
         .partners-logos { grid-template-columns: repeat(2, 1fr); }
         .live-player { max-height: 50vh; }
+        .schedule-container { padding-left: 0; }
+        .schedule-container::before { display: none; }
+        .schedule-marker { display: none; }
     }
 </style>
 </head>
@@ -479,6 +523,7 @@
     <ul class="nav-menu">
         <li><a href="#live">Трансляция</a></li>
         <li><a href="#schedule">Расписание</a></li>
+        <li><a href="#program">Программа</a></li>
         <li><a href="#partners">Партнёры</a></li>
         <li><a href="#useful">Полезное</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -489,7 +534,8 @@
 <div class="hero-live" id="live">
     <div class="hero-live-inner">
         <div class="live-player">
-            <iframe id="liveFrame" src="https://www.youtube.com/embed/live_stream?channel=UCxxxxxxxx" allowfullscreen></iframe>
+            <!-- Сюда вставьте ссылку на вашу основную трансляцию -->
+            <iframe id="liveFrame" src="https://www.youtube.com/embed/XXXXXXXX" allowfullscreen></iframe>
         </div>
 
         <!-- КНОПКИ ТРАНСЛЯЦИЙ -->
@@ -519,7 +565,18 @@
     <div class="schedule-scroll" id="scheduleScroll"></div>
 </section>
 
-<!-- БЛОК 3: ПАРТНЁРЫ -->
+<!-- БЛОК 3: ПРОГРАММА (Старый дизайн) -->
+<section id="program">
+    <h2 class="section-title">Программа</h2>
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="0">Основная сцена</button>
+        <button class="tab-btn" data-tab="1">Зал 1</button>
+        <button class="tab-btn" data-tab="2">Зал 2</button>
+    </div>
+    <div class="schedule-container" id="programList"></div>
+</section>
+
+<!-- БЛОК 4: ПАРТНЁРЫ -->
 <section id="partners">
     <h2 class="section-title">Партнёры</h2>
     <div class="partners-stack">
@@ -538,54 +595,51 @@
     </div>
 </section>
 
-<!-- БЛОК 4: ОТВЛЕКИСЬ -->
+<!-- БЛОК 5: ОТВЛЕКИСЬ -->
 <section id="distract">
     <h2 class="section-title">Отвлекись</h2>
     <div class="distract-grid">
         <a class="distract-card" href="postcard.html">
-            <img src="postcard.png" alt="Открытка">
+            <div class="distract-emoji">💌</div>
             <span>Открытка</span>
         </a>
         <a class="distract-card" href="marketplace-test.html">
-            <img src="pencil.png" alt="Тест инструментов">
+            <div class="distract-emoji">📝</div>
             <span>Тест инструментов менеджера маркетплейсов</span>
         </a>
         <a class="distract-card" href="export-wall.html">
-            <img src="note.png" alt="Стена плача">
+            <div class="distract-emoji">🗒️</div>
             <span>Стена экспортного плача</span>
         </a>
     </div>
 </section>
 
-<!-- БЛОК 5: ВАМ БУДЕТ ПОЛЕЗНО (КАРУСЕЛЬ) -->
+<!-- БЛОК 6: ВАМ БУДЕТ ПОЛЕЗНО (КАРУСЕЛЬ) -->
 <section class="useful-section" id="useful">
     <h2 class="section-title">Вам будет полезно</h2>
     <div class="useful-carousel" id="usefulCarousel">
-        <!-- Баннер 1 -->
         <div class="banner-slide bg-1 pos-center" data-index="0">
             <div class="banner-content">
                 <h3>Онлайн-помощник по маркетплейсам</h3>
-                <p>Подбор площадки, расчёт логистики и пошаговый план выхода на маркетплейсы — за 10 минут вместо 10 дней.</p>
+                <p>Подбор площадки, расчёт логистики и пошаговый план выхода на маркетплейсы.</p>
             </div>
         </div>
-        <!-- Баннер 2 -->
         <div class="banner-slide bg-2 pos-right" data-index="1">
             <div class="banner-content">
                 <h3>Национальные магазины РЭЦ</h3>
-                <p>Ваш товар — на витринах за рубежом. Готовые каналы продаж в 20+ странах без открытия юрлица.</p>
+                <p>Ваш товар — на витринах за рубежом. Готовые каналы продаж в 20+ странах.</p>
             </div>
         </div>
-        <!-- Баннер 3 -->
         <div class="banner-slide bg-3 pos-hidden" data-index="2">
             <div class="banner-content">
                 <h3>Портал «Электронная торговля»</h3>
-                <p>База знаний, чек-листы и кейсы экспортёров. Всё, чтобы не наступить на грабли в e-commerce.</p>
+                <p>База знаний, чек-листы и кейсы экспортёров. Всё об e-commerce.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- БЛОК 6: ОБ ОРГАНИЗАТОРЕ -->
+<!-- БЛОК 7: ОБ ОРГАНИЗАТОРЕ -->
 <section id="about">
     <h2 class="section-title">Об организаторе</h2>
     <div class="about-org">
@@ -602,40 +656,40 @@
     </div>
 </section>
 
-<!-- БЛОК 7: НАША КОМАНДА -->
+<!-- БЛОК 8: НАША КОМАНДА -->
 <section id="team">
     <h2 class="section-title">Наша команда</h2>
     <div class="team-list">
         <div class="team-row">
-            <img class="team-photo" src="team-placeholder.jpg" alt="Участник 1">
+            <img class="team-photo" src="buddy.png" alt="Участник 1">
             <div class="team-text">
                 <h4>Анна Иванова</h4>
                 <p>Руководитель проекта. Отвечает за стратегию мероприятия и координацию всех потоков. В РЭЦ 6 лет, до этого — в международном маркетинге.</p>
             </div>
         </div>
         <div class="team-row">
-            <img class="team-photo" src="team-placeholder.jpg" alt="Участник 2">
+            <img class="team-photo" src="buddy.png" alt="Участник 2">
             <div class="team-text">
                 <h4>Дмитрий Соколов</h4>
                 <p>Технический директор трансляции. Отвечает за стриминг, оборудование и бесперебойную работу трёх залов. Провёл 200+ онлайн-мероприятий.</p>
             </div>
         </div>
         <div class="team-row">
-            <img class="team-photo" src="team-placeholder.jpg" alt="Участник 3">
+            <img class="team-photo" src="buddy.png" alt="Участник 3">
             <div class="team-text">
                 <h4>Мария Петрова</h4>
                 <p>Контент-менеджер. Собирает программу, работает со спикерами и готовит материалы. Любит превращать сложные темы в понятные тезисы.</p>
             </div>
         </div>
         <div class="team-row">
-            <img class="team-photo" src="team-placeholder.jpg" alt="Участник 4">
+            <img class="team-photo" src="buddy.png" alt="Участник 4">
             <div class="team-text">
                 <h4>Игорь Кузнецов</h4>
                 <p>PR и коммуникации. Отвечает за информационных партнёров, соцсети и медиа-поддержку. Считает, что хороший экспорт начинается с хорошего сторителлинга.</p>
             </div>
         </div>
         <div class="team-row">
-            <img class="team-photo" src="team-placeholder.jpg" alt="Участник 5">
+            <img class="team-photo" src="buddy.png" alt="Участник 5">
             <div class="team-text">
                 <h4>Ольга Смирнова</h4>
                 <p>Куратор партнёров и гостей. Помогает участникам находить нужные контакты, а партнёрам — аудиторию. В РЭЦ с 2018 года.</p>
@@ -644,7 +698,7 @@
     </div>
 </section>
 
-<!-- БЛОК 8: FAQ -->
+<!-- БЛОК 9: FAQ -->
 <section id="faq">
     <h2 class="section-title">Ответы на вопросы</h2>
     <div class="faq-wrap">
@@ -707,6 +761,13 @@ const scheduleData = {
     ]
 };
 
+// Ссылки на трансляции для каждого канала (замените на свои)
+const channelLinks = [
+    "https://my.mts-link.ru/j/exportcenter/25652788167/record-new/25119622971", // Основная сцена
+    "https://my.mts-link.ru/j/exportcenter/25626752567/record-new/25092075125", // Зал 1
+    "https://my.mts-link.ru/j/exportcenter/21039930853/record-new/20318571279"  // Зал 2
+];
+
 const channelNames = ["Основная сцена", "Зал 1", "Зал 2"];
 let activeChannel = 0;
 
@@ -761,6 +822,24 @@ function renderSchedule(channelIndex) {
     });
 }
 
+/* ================= РЕНДЕР ПРОГРАММЫ (старый дизайн) ================= */
+function renderProgram(channelIndex) {
+    const wrap = document.getElementById("programList");
+    wrap.innerHTML = "";
+    (scheduleData[channelIndex] || []).forEach((s) => {
+        const item = document.createElement("div");
+        item.className = "schedule-item";
+        item.innerHTML = `
+            <div class="schedule-marker"></div>
+            <div class="schedule-content">
+                <div class="schedule-time">${s.start} – ${s.end}</div>
+                <div class="schedule-title">${s.title}</div>
+            </div>
+        `;
+        wrap.appendChild(item);
+    });
+}
+
 /* ================= DRAG-TO-SCROLL ДЛЯ ЛЕНТЫ ================= */
 function enableDragScroll(el) {
     let isDown = false, startX, scrollLeft;
@@ -787,8 +866,18 @@ document.querySelectorAll(".channel-btn").forEach((btn) => {
         document.querySelectorAll(".channel-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeChannel = Number(btn.dataset.channel);
+        document.getElementById("liveFrame").src = channelLinks[activeChannel];
         renderSchedule(activeChannel);
         updateChannelButtons();
+    });
+});
+
+/* ================= КНОПКИ ПРОГРАММЫ ================= */
+document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderProgram(Number(btn.dataset.tab));
     });
 });
 
@@ -796,13 +885,11 @@ document.querySelectorAll(".channel-btn").forEach((btn) => {
 const carousel = document.getElementById("usefulCarousel");
 const slides = Array.from(carousel.querySelectorAll(".banner-slide"));
 let currentSlide = 0;
-const totalSlides = slides.length;
 
 function updateCarousel() {
     slides.forEach((slide, i) => {
         slide.classList.remove("pos-center", "pos-left", "pos-right", "pos-hidden");
         let diff = i - currentSlide;
-        // нормализуем в диапазон -1..1 (для 3 слайдов)
         if (diff === -2) diff = 1;
         if (diff === 2) diff = -1;
         if (diff === 0) slide.classList.add("pos-center");
@@ -816,7 +903,6 @@ slides.forEach((slide) => {
     slide.addEventListener("click", () => {
         const idx = Number(slide.dataset.index);
         if (idx === currentSlide) {
-            // клик по центральному — переход по ссылке
             const links = [
                 "https://myexport.exportcenter.ru/services-eku/Podbor_i_razmeshenie/",
                 "https://myexport.exportcenter.ru/services-eku/podbor-i-razmeshenie-na-nacionalnyx-torgovyh-ploshadkah",
@@ -837,10 +923,13 @@ document.querySelectorAll(".faq-question").forEach((q) => {
     });
 });
 
-/* ================= ПАРТНЁРЫ (нижний блок) ================= */
+/* ================= ПАРТНЁРЫ (Логотипы из репозитория) ================= */
 const otherPartners = [
-    "partner1.png", "partner2.png", "partner3.png", "partner4.png", "partner5.png",
-    "partner6.png", "partner7.png", "partner8.png", "partner9.png", "partner10.png"
+    "bonanza.jpg", "americanas.png", "ananas.png", "app-store.jpg", 
+    "archiexpo.png", "archiproducts.png", "aukro.png", "averest-capital.png",
+    "aws-marketplace.png", "bandcamp.png", "barnes-and-noble.png", "bein.png",
+    "best-buy.png", "biblio.png", "bilibili.png", "bobbie.png",
+    "bobshop.png", "bol-com.png", "bol-com-alt.png" // Если файлов 19, последний можно убрать
 ];
 const pLogos = document.getElementById("partnersLogos");
 otherPartners.forEach(src => {
@@ -853,6 +942,7 @@ otherPartners.forEach(src => {
 /* ================= ИНИЦИАЛИЗАЦИЯ ================= */
 document.addEventListener("DOMContentLoaded", () => {
     renderSchedule(activeChannel);
+    renderProgram(0);
     enableDragScroll(document.getElementById("scheduleScroll"));
     updateChannelButtons();
     updateCarousel();
