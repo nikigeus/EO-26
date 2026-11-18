@@ -287,6 +287,17 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 15px;
     }
+   .partners-logos--gen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .partners-logos--gen .partner-logo {
+        width: 220px; /* Размер логотипа. Можете поменять на 180px или 260px */
+        max-width: 100%;
+    }
     .partner-logo {
         background: #ffffff;
         border: 1px solid var(--border);
@@ -583,7 +594,7 @@
     <div class="partners-stack">
         <div class="partners-block glass">
             <h3>Генеральные партнёры</h3>
-            <div class="partners-logos">
+            <div class="partners-logos partners-logos--gen">
                 <div class="partner-logo"><img src="mec.jpg" alt="МЭЦ"></div>
                 <div class="partner-logo"><img src="minec.png" alt="Минэк"></div>
                 <div class="partner-logo"><img src="mos.png" alt="МОС"></div>
@@ -926,11 +937,11 @@ document.querySelectorAll(".faq-question").forEach((q) => {
 
 /* ================= ПАРТНЁРЫ (Логотипы из репозитория) ================= */
 const otherPartners = [
-    "bonanza.jpg", "americanas.png", "ananas.png", "app-store.jpg", 
-    "archiexpo.png", "archiproducts.png", "aukro.png", "averest-capital.png",
-    "aws-marketplace.png", "bandcamp.png", "barnes-and-noble.png", "bein.png",
-    "best-buy.png", "biblio.png", "bilibili.png", "bobbie.png",
-    "bobshop.png", "bol-com.png", "bol-com-alt.png" // Если файлов 19, последний можно убрать
+    "Bonanza.jpg", "Americanas.png", "Ananas.png", "App-store.jpg", 
+    "Archiexpo.png", "Archiproducts.png", "Aukro.png", "Averest-capital.png",
+    "Aws-marketplace.png", "Bandcamp.png", "Barnes-and-noble.png", "Bein.png",
+    "Best-buy.png", "Biblio.png", "Bilibili.png", "Bobbie.png",
+    "Bobshop.png", "Bol-com.png", "Bol-com-alt.png" // Если файлов 19, последний можно убрать
 ];
 const pLogos = document.getElementById("partnersLogos");
 otherPartners.forEach(src => {
