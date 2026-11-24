@@ -1,1 +1,33 @@
-
+{
+  "link_main": "https://my.mts-link.ru/j/exportcenter/28545245544",
+  "link_hall1": "https://my.mts-link.ru/j/exportcenter/28545365448",
+  "link_hall2": "https://my.mts-link.ru/j/exportcenter/28545365448",
+  "banner_link1": "https://myexport.exportcenter.ru/services-eku/Podbor_i_razmeshenie/",
+  "banner_link2": "https://myexport.exportcenter.ru/services-eku/podbor-i-razmeshenie-na-nacionalnyx-torgovyh-ploshadkah",
+  "banner_link3": "https://myexport.exportcenter.ru/knowledge-base/",
+  "banner_img1": "",
+  "banner_img2": "",
+  "banner_img3": "",
+  "section_order": [
+    { "id": "live" },
+    { "id": "schedule" },
+    { "id": "program" },
+    { "id": "partners" },
+    { "id": "distract" },
+    { "id": "useful" },
+    { "id": "about" },
+    { "id": "team" },
+    { "id": "faq" }
+  ],
+  "schedule": {
+    "0": [
+      { "start": "10:00", "end": "10:30", "title": "Открытие форума", "sub": "Приветственное слово организаторов" }
+    ],
+    "1": [
+      { "start": "10:00", "end": "11:00", "title": "Логистика для экспортёров", "sub": "Практический семинар" }
+    ],
+    "2": [
+      { "start": "10:00", "end": "11:00", "title": "Электронная торговля: старт", "sub": "Для новичков" }
+    ]
+  }
+}
