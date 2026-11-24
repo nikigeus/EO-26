@@ -378,7 +378,6 @@
             border-color: var(--brand);
         }
         
-        /* Карточка с картинкой */
         .distract-card--image {
             padding: 0;
             justify-content: space-between;
@@ -438,6 +437,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-size: cover;
+            background-position: center;
         }
         .banner-slide .banner-content {
             padding: 40px;
@@ -450,6 +451,14 @@
             width: 100%;
             height: 100%;
             color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+        .banner-slide .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
         }
         .banner-slide .banner-content h3 { font-size: 1.8rem; font-weight: 900; line-height: 1.2; }
         .banner-slide .banner-content p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; }
@@ -628,193 +637,8 @@
     </ul>
 </header>
 
-<!-- БЛОК 1: ГЕРОЙ С ТРАНСЛЯЦИЕЙ -->
-<div class="hero-live" id="live">
-    <div class="hero-live-inner">
-        <div class="live-player">
-            <!-- Сюда вставьте ссылку на вашу основную трансляцию -->
-            <iframe id="liveFrame" src="https://my.mts-link.ru/j/exportcenter/28616325713" allowfullscreen></iframe>
-        </div>
-
-        <!-- КНОПКИ ТРАНСЛЯЦИЙ -->
-        <div class="channels" id="channels">
-            <button class="channel-btn active" data-channel="0">
-                <div class="channel-title">Основная сцена</div>
-                <div class="channel-time">—</div>
-                <div class="channel-topic">—</div>
-            </button>
-            <button class="channel-btn" data-channel="1">
-                <div class="channel-title">Зал 1</div>
-                <div class="channel-time">—</div>
-                <div class="channel-topic">—</div>
-            </button>
-            <button class="channel-btn" data-channel="2">
-                <div class="channel-title">Зал 2</div>
-                <div class="channel-time">—</div>
-                <div class="channel-topic">—</div>
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- БЛОК 2: ЛЕНТА РАСПИСАНИЯ -->
-<section class="schedule-section" id="schedule">
-    <h2 class="section-title">Расписание</h2>
-    <div class="schedule-scroll" id="scheduleScroll"></div>
-</section>
-
-<!-- БЛОК 3: ПРОГРАММА -->
-<section id="program">
-    <h2 class="section-title">Программа</h2>
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="0">Основная сцена</button>
-        <button class="tab-btn" data-tab="1">Зал 1</button>
-        <button class="tab-btn" data-tab="2">Зал 2</button>
-    </div>
-    <div class="schedule-container" id="programList"></div>
-</section>
-
-<!-- БЛОК 4: ПАРТНЁРЫ -->
-<section id="partners">
-    <h2 class="section-title">Партнёры</h2>
-    <div class="partners-stack">
-        <div class="partners-block glass">
-            <h3>Генеральные партнёры</h3>
-            <div class="partners-logos partners-logos--gen">
-                <div class="partner-logo"><img src="mec.jpg" alt="МЭЦ"></div>
-                <div class="partner-logo"><img src="minec.png" alt="Минэк"></div>
-                <div class="partner-logo"><img src="mos.png" alt="МОС"></div>
-            </div>
-        </div>
-        <div class="partners-block glass">
-            <h3>Партнёры</h3>
-            <div class="partners-logos" id="partnersLogos"></div>
-        </div>
-    </div>
-</section>
-
-<!-- БЛОК 5: ОТВЛЕКИСЬ -->
-<section id="distract">
-    <h2 class="section-title">Отвлекись</h2>
-    <div class="distract-grid">
-        <!-- Карточка с картинкой -->
-        <a class="distract-card distract-card--image" href="export-by-face.html">
-            <img src="postcard-banner.jpg" alt="Открытка с конференции">
-            <span>Открытка</span>
-        </a>
-        <a class="distract-card" href="marketplace-test.html">
-            <div class="distract-emoji">📝</div>
-            <span>Тест инструментов менеджера маркетплейсов</span>
-        </a>
-        <a class="distract-card" href="export-wall.html">
-            <div class="distract-emoji">🗒️</div>
-            <span>Стена экспортного плача</span>
-        </a>
-    </div>
-</section>
-
-<!-- БЛОК 6: ВАМ БУДЕТ ПОЛЕЗНО -->
-<section class="useful-section" id="useful">
-    <h2 class="section-title">Вам будет полезно</h2>
-    <div class="useful-carousel" id="usefulCarousel">
-        <div class="banner-slide bg-1 pos-center" data-index="0">
-            <div class="banner-content">
-                <h3>Онлайн-помощник по маркетплейсам</h3>
-                <p>Подбор площадки, расчёт логистики и пошаговый план выхода на маркетплейсы.</p>
-            </div>
-        </div>
-        <div class="banner-slide bg-2 pos-right" data-index="1">
-            <div class="banner-content">
-                <h3>Национальные магазины РЭЦ</h3>
-                <p>Ваш товар — на витринах за рубежом. Готовые каналы продаж в 20+ странах.</p>
-            </div>
-        </div>
-        <div class="banner-slide bg-3 pos-hidden" data-index="2">
-            <div class="banner-content">
-                <h3>Портал «Электронная торговля»</h3>
-                <p>База знаний, чек-листы и кейсы экспортёров. Всё об e-commerce.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- БЛОК 7: ОБ ОРГАНИЗАТОРЕ -->
-<section id="about">
-    <h2 class="section-title">Об организаторе</h2>
-    <div class="about-org">
-        <img src="photo2025.jpg" alt="РЭЦ">
-        <p>
-            Российский экспортный центр (РЭЦ) — государственный институт поддержки экспорта, 
-            созданный для того, чтобы российские компании выходили на внешние рынки быстрее, 
-            дешевле и с меньшими рисками. РЭЦ объединяет финансовые, страховые, 
-            информационные и образовательные инструменты: от субсидирования логистики 
-            и сертификации до поиска партнёров и продвижения на маркетплейсах. 
-            Мы работаем с малым, средним и крупным бизнесом по всей стране — от Калининграда 
-            до Владивостока, помогая превращать «хочу экспортировать» в «экспортирую».
-        </p>
-    </div>
-</section>
-
-<!-- БЛОК 8: НАША КОМАНДА -->
-<section id="team">
-    <h2 class="section-title">Наша команда</h2>
-    <div class="team-list">
-        <div class="team-row">
-            <img class="team-photo" src="buddy.png" alt="Участник 1">
-            <div class="team-text">
-                <h4>Анна Иванова</h4>
-                <p>Руководитель проекта. Отвечает за стратегию мероприятия и координацию всех потоков. В РЭЦ 6 лет, до этого — в международном маркетинге.</p>
-            </div>
-        </div>
-        <div class="team-row">
-            <img class="team-photo" src="buddy.png" alt="Участник 2">
-            <div class="team-text">
-                <h4>Дмитрий Соколов</h4>
-                <p>Технический директор трансляции. Отвечает за стриминг, оборудование и бесперебойную работу трёх залов. Провёл 200+ онлайн-мероприятий.</p>
-            </div>
-        </div>
-        <div class="team-row">
-            <img class="team-photo" src="buddy.png" alt="Участник 3">
-            <div class="team-text">
-                <h4>Мария Петрова</h4>
-                <p>Контент-менеджер. Собирает программу, работает со спикерами и готовит материалы. Любит превращать сложные темы в понятные тезисы.</p>
-            </div>
-        </div>
-        <div class="team-row">
-            <img class="team-photo" src="buddy.png" alt="Участник 4">
-            <div class="team-text">
-                <h4>Игорь Кузнецов</h4>
-                <p>PR и коммуникации. Отвечает за информационных партнёров, соцсети и медиа-поддержку. Считает, что хороший экспорт начинается с хорошего сторителлинга.</p>
-            </div>
-        </div>
-        <div class="team-row">
-            <img class="team-photo" src="buddy.png" alt="Участник 5">
-            <div class="team-text">
-                <h4>Ольга Смирнова</h4>
-                <p>Куратор партнёров и гостей. Помогает участникам находить нужные контакты, а партнёрам — аудиторию. В РЭЦ с 2018 года.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- БЛОК 9: FAQ -->
-<section id="faq">
-    <h2 class="section-title">Ответы на вопросы</h2>
-    <div class="faq-wrap">
-        <div class="faq-item">
-            <div class="faq-question">Как получить доступ к трансляции? <span class="faq-icon">▾</span></div>
-            <div class="faq-answer">Трансляция доступна на этой странице в день мероприятия. Авторизация не требуется — достаточно открыть страницу.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Будут ли записи сессий? <span class="faq-icon">▾</span></div>
-            <div class="faq-answer">Да, записи всех сессий будут опубликованы через 24 часа после мероприятия.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Как стать партнёром мероприятия? <span class="faq-icon">▾</span></div>
-            <div class="faq-answer">Напишите на партнёры@example.ru — мы ответим в течение двух рабочих дней.</div>
-        </div>
-    </div>
-</section>
+<!-- КОНТЕЙНЕР ДЛЯ ДИНАМИЧЕСКИХ БЛОКОВ -->
+<main id="mainContent"></main>
 
 <!-- ФУТТЕР -->
 <footer>
@@ -831,44 +655,338 @@
 </footer>
 
 <script>
-/* ================= ДАННЫЕ РАСПИСАНИЯ ================= */
-const scheduleData = {
-    0: [ // Основная сцена
-        { start: "10:00", end: "10:30", title: "Открытие форума", sub: "Приветственное слово организаторов" },
-        { start: "10:30", end: "11:30", title: "Ключевая сессия: экспорт без границ", sub: "Спикеры: А. Иванов, М. Смирнова" },
-        { start: "11:30", end: "12:30", title: "Маркетплейсы как канал экспорта", sub: "" },
-        { start: "12:30", end: "13:30", title: "Обед и нетворкинг", sub: "Зона партнёров, холл 2-го этажа" },
-        { start: "13:30", end: "15:00", title: "Панель: барьеры и решения", sub: "Модератор: Д. Соколов" },
-        { start: "15:00", end: "16:00", title: "Кейсы экспортёров", sub: "Практика 5 компаний" },
-        { start: "16:00", end: "17:00", title: "Закрытие первого дня", sub: "" }
-    ],
-    1: [ // Зал 1
-        { start: "10:00", end: "11:00", title: "Логистика для экспортёров", sub: "Практический семинар" },
-        { start: "11:00", end: "12:00", title: "Сертификация и стандарты", sub: "Требования ЕАЭС и не только" },
-        { start: "12:00", end: "13:00", title: "Валютный контроль: что важно", sub: "" },
-        { start: "13:00", end: "14:00", title: "Перерыв", sub: "" },
-        { start: "14:00", end: "15:30", title: "Финансовые инструменты РЭЦ", sub: "Субсидии, страхование, кредиты" },
-        { start: "15:30", end: "16:30", title: "Вопросы и ответы с экспертами", sub: "" }
-    ],
-    2: [ // Зал 2
-        { start: "10:00", end: "11:00", title: "Электронная торговля: старт", sub: "Для новичков" },
-        { start: "11:00", end: "12:00", title: "Национальные магазины РЭЦ", sub: "Как попасть на полку" },
-        { start: "12:00", end: "13:00", title: "Продвижение на маркетплейсах", sub: "" },
-        { start: "13:00", end: "14:00", title: "Обед", sub: "" },
-        { start: "14:00", end: "15:00", title: "Аналитика и данные для роста", sub: "Инструменты и метрики" },
-        { start: "15:00", end: "16:00", title: "Упаковка и брендинг", sub: "Как нравиться иностранному покупателю" }
-    ]
-};
-
-const channelLinks = [
-    "https://my.mts-link.ru/j/exportcenter/28616325713", // Основная сцена
-    "https://my.mts-link.ru/j/exportcenter/28545365448", // Зал 1
-    "https://my.mts-link.ru/j/exportcenter/28545365448"  // Зал 2
-];
-
+/* ================= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ================= */
+let siteData = null;
 let activeChannel = 0;
 
-/* ================= ПОИСК ТЕКУЩЕЙ СЕССИИ ================= */
+/* ================= ЗАГРУЗКА ДАННЫХ ================= */
+async function loadData() {
+    try {
+        const response = await fetch('data/site.json');
+        if (!response.ok) throw new Error('Ошибка загрузки данных');
+        siteData = await response.json();
+
+        // Преобразуем section_order в массив ID
+        if (siteData.section_order && siteData.section_order.length > 0 && siteData.section_order[0].id) {
+            siteData.sectionOrder = siteData.section_order.map(item => item.id);
+        } else {
+            siteData.sectionOrder = ["live", "schedule", "program", "partners", "distract", "useful", "about", "team", "faq"];
+        }
+
+        // Приводим расписание к формату объекта (если пришло строкой)
+        if (typeof siteData.schedule === 'string') {
+            siteData.schedule = JSON.parse(siteData.schedule);
+        }
+
+        renderPage();
+    } catch (error) {
+        console.error('Не удалось загрузить данные:', error);
+        alert('Ошибка загрузки данных сайта. Пожалуйста, обновите страницу.');
+    }
+}
+
+/* ================= ФУНКЦИИ РЕНДЕРА ================= */
+function getLiveHTML() {
+    return `
+    <div class="hero-live" id="live">
+        <div class="hero-live-inner">
+            <div class="live-player">
+                <iframe id="liveFrame" src="${siteData.link_main}" allowfullscreen></iframe>
+            </div>
+            <div class="channels" id="channels">
+                <button class="channel-btn active" data-channel="0">
+                    <div class="channel-title">Основная сцена</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+                <button class="channel-btn" data-channel="1">
+                    <div class="channel-title">Зал 1</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+                <button class="channel-btn" data-channel="2">
+                    <div class="channel-title">Зал 2</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+            </div>
+        </div>
+    </div>`;
+}
+
+function getScheduleHTML() {
+    return `
+    <section class="schedule-section" id="schedule">
+        <h2 class="section-title">Расписание</h2>
+        <div class="schedule-scroll" id="scheduleScroll"></div>
+    </section>`;
+}
+
+function getProgramHTML() {
+    return `
+    <section id="program">
+        <h2 class="section-title">Программа</h2>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="0">Основная сцена</button>
+            <button class="tab-btn" data-tab="1">Зал 1</button>
+            <button class="tab-btn" data-tab="2">Зал 2</button>
+        </div>
+        <div class="schedule-container" id="programList"></div>
+    </section>`;
+}
+
+function getPartnersHTML() {
+    return `
+    <section id="partners">
+        <h2 class="section-title">Партнёры</h2>
+        <div class="partners-stack">
+            <div class="partners-block glass">
+                <h3>Генеральные партнёры</h3>
+                <div class="partners-logos partners-logos--gen">
+                    <div class="partner-logo"><img src="mec.jpg" alt="МЭЦ"></div>
+                    <div class="partner-logo"><img src="minec.png" alt="Минэк"></div>
+                    <div class="partner-logo"><img src="mos.png" alt="МОС"></div>
+                </div>
+            </div>
+            <div class="partners-block glass">
+                <h3>Партнёры</h3>
+                <div class="partners-logos" id="partnersLogos"></div>
+            </div>
+        </div>
+    </section>`;
+}
+
+function getDistractHTML() {
+    return `
+    <section id="distract">
+        <h2 class="section-title">Отвлекись</h2>
+        <div class="distract-grid">
+            <a class="distract-card distract-card--image" href="export-by-face.html">
+                <img src="postcard-banner.jpg" alt="Открытка с конференции">
+                <span>Открытка</span>
+            </a>
+            <a class="distract-card" href="marketplace-test.html">
+                <div class="distract-emoji">📝</div>
+                <span>Тест инструментов менеджера маркетплейсов</span>
+            </a>
+            <a class="distract-card" href="export-wall.html">
+                <div class="distract-emoji">🗒️</div>
+                <span>Стена экспортного плача</span>
+            </a>
+        </div>
+    </section>`;
+}
+
+function getUsefulHTML() {
+    const images = [siteData.banner_img1, siteData.banner_img2, siteData.banner_img3];
+    const links = [siteData.banner_link1, siteData.banner_link2, siteData.banner_link3];
+    const titles = ['Онлайн-помощник по маркетплейсам', 'Национальные магазины РЭЦ', 'Портал «Электронная торговля»'];
+    const texts = [
+        'Подбор площадки, расчёт логистики и пошаговый план выхода на маркетплейсы.',
+        'Ваш товар — на витринах за рубежом. Готовые каналы продаж в 20+ странах.',
+        'База знаний, чек-листы и кейсы экспортёров. Всё об e-commerce.'
+    ];
+    
+    let bannersHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const img = images[i];
+        const bgStyle = img ? `background-image: url('${img}');` : '';
+        const posClass = i === 0 ? 'pos-center' : (i === 1 ? 'pos-right' : 'pos-hidden');
+        bannersHTML += `
+        <div class="banner-slide bg-${i+1} ${posClass}" data-index="${i}" data-link="${links[i]}" style="${bgStyle}">
+            ${img ? '<div class="banner-overlay"></div>' : ''}
+            <div class="banner-content">
+                <h3>${titles[i]}</h3>
+                <p>${texts[i]}</p>
+            </div>
+        </div>`;
+    }
+    return `
+    <section class="useful-section" id="useful">
+        <h2 class="section-title">Вам будет полезно</h2>
+        <div class="useful-carousel" id="usefulCarousel">${bannersHTML}</div>
+    </section>`;
+}
+
+function getAboutHTML() {
+    return `
+    <section id="about">
+        <h2 class="section-title">Об организаторе</h2>
+        <div class="about-org">
+            <img src="photo2025.jpg" alt="РЭЦ">
+            <p>
+                Российский экспортный центр (РЭЦ) — государственный институт поддержки экспорта, 
+                созданный для того, чтобы российские компании выходили на внешние рынки быстрее, 
+                дешевле и с меньшими рисками. РЭЦ объединяет финансовые, страховые, 
+                информационные и образовательные инструменты: от субсидирования логистики 
+                и сертификации до поиска партнёров и продвижения на маркетплейсах. 
+                Мы работаем с малым, средним и крупным бизнесом по всей стране — от Калининграда 
+                до Владивостока, помогая превращать «хочу экспортировать» в «экспортирую».
+            </p>
+        </div>
+    </section>`;
+}
+
+function getTeamHTML() {
+    const team = [
+        { name: "Анна Иванова", desc: "Руководитель проекта. Отвечает за стратегию мероприятия и координацию всех потоков. В РЭЦ 6 лет, до этого — в международном маркетинге." },
+        { name: "Дмитрий Соколов", desc: "Технический директор трансляции. Отвечает за стриминг, оборудование и бесперебойную работу трёх залов. Провёл 200+ онлайн-мероприятий." },
+        { name: "Мария Петрова", desc: "Контент-менеджер. Собирает программу, работает со спикерами и готовит материалы. Любит превращать сложные темы в понятные тезисы." },
+        { name: "Игорь Кузнецов", desc: "PR и коммуникации. Отвечает за информационных партнёров, соцсети и медиа-поддержку. Считает, что хороший экспорт начинается с хорошего сторителлинга." },
+        { name: "Ольга Смирнова", desc: "Куратор партнёров и гостей. Помогает участникам находить нужные контакты, а партнёрам — аудиторию. В РЭЦ с 2018 года." }
+    ];
+    let listHTML = '';
+    team.forEach((t, i) => {
+        listHTML += `
+        <div class="team-row">
+            <img class="team-photo" src="buddy.png" alt="Участник ${i+1}">
+            <div class="team-text">
+                <h4>${t.name}</h4>
+                <p>${t.desc}</p>
+            </div>
+        </div>`;
+    });
+    return `
+    <section id="team">
+        <h2 class="section-title">Наша команда</h2>
+        <div class="team-list">${listHTML}</div>
+    </section>`;
+}
+
+function getFAQHTML() {
+    return `
+    <section id="faq">
+        <h2 class="section-title">Ответы на вопросы</h2>
+        <div class="faq-wrap">
+            <div class="faq-item">
+                <div class="faq-question">Как получить доступ к трансляции? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Трансляция доступна на этой странице в день мероприятия. Авторизация не требуется — достаточно открыть страницу.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Будут ли записи сессий? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Да, записи всех сессий будут опубликованы через 24 часа после мероприятия.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Как стать партнёром мероприятия? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Напишите на партнёры@example.ru — мы ответим в течение двух рабочих дней.</div>
+            </div>
+        </div>
+    </section>`;
+}
+
+const SECTION_RENDERERS = {
+    "live": getLiveHTML,
+    "schedule": getScheduleHTML,
+    "program": getProgramHTML,
+    "partners": getPartnersHTML,
+    "distract": getDistractHTML,
+    "useful": getUsefulHTML,
+    "about": getAboutHTML,
+    "team": getTeamHTML,
+    "faq": getFAQHTML
+};
+
+/* ================= ИНИЦИАЛИЗАЦИЯ ================= */
+function renderPage() {
+    const main = document.getElementById('mainContent');
+    main.innerHTML = '';
+    siteData.sectionOrder.forEach(sectionId => {
+        if (SECTION_RENDERERS[sectionId]) {
+            main.innerHTML += SECTION_RENDERERS[sectionId]();
+        }
+    });
+    bindEvents();
+}
+
+function bindEvents() {
+    // Кнопки каналов
+    document.querySelectorAll(".channel-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".channel-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeChannel = Number(btn.dataset.channel);
+            const links = [siteData.link_main, siteData.link_hall1, siteData.link_hall2];
+            document.getElementById("liveFrame").src = links[activeChannel];
+            renderSchedule(activeChannel);
+            updateChannelButtons();
+        });
+    });
+
+    // Табы программы
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProgram(Number(btn.dataset.tab));
+        });
+    });
+
+    // Карусель
+    const carousel = document.getElementById("usefulCarousel");
+    if (carousel) {
+        const slides = Array.from(carousel.querySelectorAll(".banner-slide"));
+        let currentSlide = 0;
+        function updateCarousel() {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("pos-center", "pos-left", "pos-right", "pos-hidden");
+                let diff = i - currentSlide;
+                if (diff === -2) diff = 1;
+                if (diff === 2) diff = -1;
+                if (diff === 0) slide.classList.add("pos-center");
+                else if (diff === -1) slide.classList.add("pos-left");
+                else if (diff === 1) slide.classList.add("pos-right");
+                else slide.classList.add("pos-hidden");
+            });
+        }
+        slides.forEach((slide) => {
+            slide.addEventListener("click", () => {
+                const idx = Number(slide.dataset.index);
+                if (idx === currentSlide) {
+                    window.open(slide.dataset.link, "_blank");
+                } else {
+                    currentSlide = idx;
+                    updateCarousel();
+                }
+            });
+        });
+        updateCarousel();
+    }
+
+    // FAQ
+    document.querySelectorAll(".faq-question").forEach((q) => {
+        q.addEventListener("click", () => {
+            q.parentElement.classList.toggle("active");
+        });
+    });
+
+    // Партнёры (остальные)
+    const otherPartners = [
+        "Bonanza.png", "Americanas.png", "Ananas.png", "App Store.png", 
+        "ArchiEXPO.png", "Archiproducts.png", "Aukro.png", "Averest.com.png",
+        "AWS Marketplace.png", "Bandcamp.png", "Barnes and noble.png", "beIN.png",
+        "Best buy.png", "Biblio com.png", "Bili.png", "Bobbie.de.png",
+        "Bobshop-logo.png", "Bol.png"
+    ];
+    const pLogos = document.getElementById("partnersLogos");
+    if (pLogos) {
+        pLogos.innerHTML = '';
+        otherPartners.forEach(src => {
+            const div = document.createElement("div");
+            div.className = "partner-logo";
+            div.innerHTML = `<img src="${src}" alt="Партнёр" loading="lazy">`;
+            pLogos.appendChild(div);
+        });
+    }
+
+    // Инициализация расписания
+    renderSchedule(activeChannel);
+    renderProgram(0);
+    enableDragScroll(document.getElementById("scheduleScroll"));
+    updateChannelButtons();
+    setInterval(updateChannelButtons, 30000);
+}
+
+/* ================= ЛОГИКА ================= */
 function timeToMinutes(t) {
     const [h, m] = t.split(":").map(Number);
     return h * 60 + m;
@@ -877,7 +995,7 @@ function timeToMinutes(t) {
 function findCurrentSession(channelIndex) {
     const now = new Date();
     const cur = now.getHours() * 60 + now.getMinutes();
-    const list = scheduleData[channelIndex] || [];
+    const list = siteData.schedule[channelIndex] || [];
     for (const s of list) {
         const start = timeToMinutes(s.start);
         const end = timeToMinutes(s.end);
@@ -902,11 +1020,11 @@ function updateChannelButtons() {
     });
 }
 
-/* ================= РЕНДЕР ЛЕНТЫ РАСПИСАНИЯ ================= */
 function renderSchedule(channelIndex) {
     const wrap = document.getElementById("scheduleScroll");
+    if (!wrap) return;
     wrap.innerHTML = "";
-    const list = scheduleData[channelIndex] || [];
+    const list = siteData.schedule[channelIndex] || [];
     list.forEach((s) => {
         const card = document.createElement("div");
         card.className = "schedule-card";
@@ -919,11 +1037,11 @@ function renderSchedule(channelIndex) {
     });
 }
 
-/* ================= РЕНДЕР ПРОГРАММЫ ================= */
 function renderProgram(channelIndex) {
     const wrap = document.getElementById("programList");
+    if (!wrap) return;
     wrap.innerHTML = "";
-    (scheduleData[channelIndex] || []).forEach((s) => {
+    (siteData.schedule[channelIndex] || []).forEach((s) => {
         const item = document.createElement("div");
         item.className = "schedule-item";
         item.innerHTML = `
@@ -937,8 +1055,8 @@ function renderProgram(channelIndex) {
     });
 }
 
-/* ================= DRAG-TO-SCROLL ДЛЯ ЛЕНТЫ ================= */
 function enableDragScroll(el) {
+    if (!el) return;
     let isDown = false, startX, scrollLeft;
     el.addEventListener("mousedown", (e) => {
         isDown = true;
@@ -957,94 +1075,8 @@ function enableDragScroll(el) {
     });
 }
 
-/* ================= КНОПКИ КАНАЛОВ ================= */
-document.querySelectorAll(".channel-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        document.querySelectorAll(".channel-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        activeChannel = Number(btn.dataset.channel);
-        document.getElementById("liveFrame").src = channelLinks[activeChannel];
-        renderSchedule(activeChannel);
-        updateChannelButtons();
-    });
-});
-
-/* ================= КНОПКИ ПРОГРАММЫ ================= */
-document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderProgram(Number(btn.dataset.tab));
-    });
-});
-
-/* ================= КАРУСЕЛЬ БАННЕРОВ ================= */
-const carousel = document.getElementById("usefulCarousel");
-const slides = Array.from(carousel.querySelectorAll(".banner-slide"));
-let currentSlide = 0;
-
-function updateCarousel() {
-    slides.forEach((slide, i) => {
-        slide.classList.remove("pos-center", "pos-left", "pos-right", "pos-hidden");
-        let diff = i - currentSlide;
-        if (diff === -2) diff = 1;
-        if (diff === 2) diff = -1;
-        if (diff === 0) slide.classList.add("pos-center");
-        else if (diff === -1) slide.classList.add("pos-left");
-        else if (diff === 1) slide.classList.add("pos-right");
-        else slide.classList.add("pos-hidden");
-    });
-}
-
-slides.forEach((slide) => {
-    slide.addEventListener("click", () => {
-        const idx = Number(slide.dataset.index);
-        if (idx === currentSlide) {
-            const links = [
-                "https://myexport.exportcenter.ru/services-eku/Podbor_i_razmeshenie/",
-                "https://myexport.exportcenter.ru/services-eku/podbor-i-razmeshenie-na-nacionalnyx-torgovyh-ploshadkah",
-                "https://myexport.exportcenter.ru/knowledge-base/"
-            ];
-            window.open(links[idx], "_blank");
-        } else {
-            currentSlide = idx;
-            updateCarousel();
-        }
-    });
-});
-
-/* ================= FAQ ================= */
-document.querySelectorAll(".faq-question").forEach((q) => {
-    q.addEventListener("click", () => {
-        q.parentElement.classList.toggle("active");
-    });
-});
-
-/* ================= ПАРТНЁРЫ ================= */
-const otherPartners = [
-    "Bonanza.png", "Americanas.png", "Ananas.png", "App Store.png", 
-    "ArchiEXPO.png", "Archiproducts.png", "Aukro.png", "Averest.com.png",
-    "AWS Marketplace.png", "Bandcamp.png", "Barnes and noble.png", "beIN.png",
-    "Best buy.png", "Biblio com.png", "Bili.png", "Bobbie.de.png",
-    "Bobshop-logo.png", "Bol.png"
-];
-const pLogos = document.getElementById("partnersLogos");
-otherPartners.forEach(src => {
-    const div = document.createElement("div");
-    div.className = "partner-logo";
-    div.innerHTML = `<img src="${src}" alt="Партнёр" loading="lazy">`;
-    pLogos.appendChild(div);
-});
-
-/* ================= ИНИЦИАЛИЗАЦИЯ ================= */
-document.addEventListener("DOMContentLoaded", () => {
-    renderSchedule(activeChannel);
-    renderProgram(0);
-    enableDragScroll(document.getElementById("scheduleScroll"));
-    updateChannelButtons();
-    updateCarousel();
-    setInterval(updateChannelButtons, 30000);
-});
+/* ================= СТАРТ ================= */
+document.addEventListener("DOMContentLoaded", loadData);
 </script>
 </body>
 </html>
