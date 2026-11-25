@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РЭЦ — Мероприятие</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ================= СБРОС И ПЕРЕМЕННЫЕ ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #F8F9FA;
+            --surface: #FFFFFF;
+            --surface-hover: #F1F3F5;
+            --border: #E9ECEF;
+            --accent: #B6F941;
+            --accent-hover: #A6E631;
+            --brand: #1E4DB2;
+            --text: #212529;
+            --muted: #6C757D;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.12);
+            --radius: 24px;
+            --radius-sm: 16px;
+            --transition: 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        section { padding: 100px 24px; max-width: 1400px; margin: 0 auto; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 56px;
+            color: var(--text);
+        }
+
+        .glass {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ================= ШАПКА ================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(248, 249, 250, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-logo img { height: 36px; }
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color var(--transition);
+        }
+        .nav-menu a:hover { color: var(--brand); }
+        
+        .nav-btn {
+            background: var(--text);
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 12px;
+            transition: background var(--transition) !important;
+        }
+        .nav-btn:hover { background: var(--brand) !important; }
+
+        /* ================= БЛОК 1: ГЕРОЙ С ТРАНСЛЯЦИЕЙ ================= */
+        .hero-live {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background-image:
+                radial-gradient(circle at center, rgba(30,77,178,0) 0%, rgba(30,77,178,0) 40%, rgba(30,77,178,0.85) 100%),
+                url('fon-verh.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero-live-inner {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .live-player {
+            width: 100%;
+            max-width: 1400px;
+            aspect-ratio: 16 / 9;
+            max-height: calc(100vh - 200px);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            background: #000;
+            position: relative;
+        }
+        .live-player iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Кнопки трансляций */
+        .channels {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .channel-btn {
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            color: var(--text);
+            box-shadow: var(--shadow-sm);
+        }
+        .channel-btn:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .channel-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(182, 249, 65, 0.4);
+        }
+        .channel-btn.active .channel-time { color: #2b5c00; }
+        .channel-title { font-size: 1.1rem; font-weight: 800; }
+        .channel-time { font-size: 0.85rem; font-weight: 700; color: var(--brand); letter-spacing: 0.5px; }
+        .channel-topic {
+            font-size: 0.85rem; color: var(--muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .channel-btn.active .channel-topic { color: #3b4a1e; }
+
+        /* ================= ЛЕНТА РАСПИСАНИЯ ================= */
+        .schedule-section { padding-top: 80px; }
+        .schedule-scroll {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 10px 5px 30px;
+            scroll-behavior: smooth;
+            cursor: grab;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+        .schedule-scroll.dragging { cursor: grabbing; scroll-behavior: auto; }
+        .schedule-scroll::-webkit-scrollbar { height: 8px; }
+        .schedule-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+        
+        .schedule-card {
+            flex: 0 0 calc((100% - 48px) / 3);
+            min-width: 300px;
+            padding: 32px;
+            border-radius: var(--radius);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all var(--transition);
+        }
+        .schedule-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: var(--shadow-md); 
+            border-color: var(--brand);
+        }
+        .schedule-card-time {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--brand);
+            letter-spacing: 1px;
+        }
+        .schedule-card-title { font-size: 1.15rem; font-weight: 700; line-height: 1.3; }
+        .schedule-card-sub { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+        /* ================= БЛОК ПРОГРАММА ================= */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 14px 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .tab-btn:hover { background: var(--surface-hover); }
+        .tab-btn.active {
+            background: var(--text);
+            border-color: var(--text);
+            color: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+        .schedule-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 24px;
+        }
+        .schedule-container::before {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background-image: linear-gradient(to bottom, var(--border) 50%, transparent 50%);
+            background-size: 2px 10px;
+        }
+        .schedule-item {
+            display: flex;
+            align-items: stretch;
+            gap: 24px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .schedule-marker {
+            width: 24px;
+            height: 24px;
+            background: var(--bg);
+            border: 4px solid var(--brand);
+            border-radius: 50%;
+            margin-top: 24px;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        .schedule-content {
+            flex: 1;
+            padding: 24px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: border-color var(--transition);
+        }
+        .schedule-content:hover { border-color: var(--brand); }
+        .schedule-time { font-size: 0.9rem; font-weight: 700; color: var(--brand); letter-spacing: 0.5px; }
+        .schedule-title { font-size: 1.1rem; font-weight: 600; line-height: 1.4; color: var(--text); }
+
+        /* ================= ПАРТНЁРЫ ================= */
+        .partners-stack { display: flex; flex-direction: column; gap: 32px; }
+        .partners-block { padding: 48px; }
+        .partners-block h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 32px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .partners-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+        .partners-logos--gen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .partners-logos--gen .partner-logo {
+            width: 240px;
+            max-width: 100%;
+            height: 120px;
+        }
+        .partner-logo {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            transition: all var(--transition);
+        }
+        .partner-logo:hover { 
+            transform: translateY(-4px) scale(1.02); 
+            box-shadow: var(--shadow-md); 
+            border-color: var(--brand);
+        }
+        .partner-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* ================= ОТВЛЕКИСЬ ================= */
+        .distract-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .distract-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            padding: 40px 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+            color: var(--text);
+            transition: all var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+        .distract-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--shadow-md); 
+            border-color: var(--brand);
+        }
+        
+        .distract-card--image {
+            padding: 0;
+            justify-content: space-between;
+        }
+        .distract-card--image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .distract-card--image:hover img { transform: scale(1.05); }
+        .distract-card--image span {
+            padding: 20px;
+            background: var(--surface);
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .distract-emoji {
+            font-size: 4rem;
+            line-height: 1;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+        }
+        .distract-card span { font-size: 1.1rem; font-weight: 700; line-height: 1.4; }
+
+        /* ================= ВАМ БУДЕТ ПОЛЕЗНО ================= */
+        .useful-section { overflow: hidden; }
+        .useful-carousel {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 30vh;
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            margin-top: 20px;
+        }
+        .banner-slide {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 55%;
+            height: 100%;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+                        opacity 0.6s ease,
+                        filter 0.6s ease;
+            box-shadow: var(--shadow-lg);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+        .banner-slide .banner-content {
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+        }
+        .banner-slide .banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        .banner-slide .banner-content h3 { font-size: 1.8rem; font-weight: 900; line-height: 1.2; }
+        .banner-slide .banner-content p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; }
+
+        /* Позиции */
+        .banner-slide.pos-center {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1; z-index: 3; filter: blur(0);
+        }
+        .banner-slide.pos-left {
+            transform: translate(-140%, -50%) scale(0.85);
+            opacity: 0.6; z-index: 2; filter: blur(2px);
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+                    mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+        }
+        .banner-slide.pos-right {
+            transform: translate(40%, -50%) scale(0.85);
+            opacity: 0.6; z-index: 2; filter: blur(2px);
+            -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+                    mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+        }
+        .banner-slide.pos-hidden {
+            opacity: 0; pointer-events: none; z-index: 1;
+            transform: translate(-50%, -50%) scale(0.6);
+        }
+        
+        .banner-slide.bg-1 { background: linear-gradient(135deg, var(--brand), #0d2b6b); }
+        .banner-slide.bg-2 { background: linear-gradient(135deg, #e63946, #8b1e2b); }
+        .banner-slide.bg-3 { background: linear-gradient(135deg, #2a9d8f, #1d6f66); }
+
+        /* ================= ОРГАНИЗАТОР ================= */
+        .about-org {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 56px;
+            align-items: center;
+            padding: 56px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+        .about-org img { 
+            width: 100%; height: 100%; max-height: 400px; 
+            object-fit: cover; border-radius: var(--radius-sm); 
+            box-shadow: var(--shadow-sm);
+        }
+        .about-org p { font-size: 1.1rem; line-height: 1.8; color: var(--text); }
+
+        /* ================= КОМАНДА ================= */
+        .team-list { display: flex; flex-direction: column; gap: 24px; }
+        .team-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 32px;
+            align-items: center;
+            padding: 32px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .team-row:hover { box-shadow: var(--shadow-md); transform: translateX(8px); }
+        .team-photo {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--surface-hover);
+            border: 4px solid var(--bg);
+            box-shadow: var(--shadow-sm);
+        }
+        .team-text h4 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; }
+        .team-text p { font-size: 1rem; color: var(--muted); line-height: 1.6; }
+
+        /* ================= FAQ ================= */
+        .faq-wrap { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            border-radius: var(--radius-sm); overflow: hidden; 
+            background: var(--surface); border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .faq-item:hover { border-color: var(--brand); }
+        .faq-question {
+            padding: 24px 32px; font-size: 1.1rem; font-weight: 700;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; user-select: none; color: var(--text);
+        }
+        .faq-icon {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0; opacity: 0; overflow: hidden;
+            padding: 0 32px; font-size: 1rem; color: var(--muted); line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        .faq-item.active { border-color: var(--brand); box-shadow: var(--shadow-sm); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); background: var(--brand); color: #fff; }
+        .faq-item.active .faq-answer { max-height: 300px; opacity: 1; padding-bottom: 24px; }
+
+        /* ================= ФУТТЕР ================= */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 60px 40px 40px;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            text-align: center;
+        }
+        .footer-logo img { height: 40px; }
+        .footer-nav { display: flex; gap: 32px; list-style: none; flex-wrap: wrap; justify-content: center; }
+        .footer-nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color var(--transition); }
+        .footer-nav a:hover { color: var(--brand); }
+        .footer-bottom { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+
+        /* ================= АДАПТИВ ================= */
+        @media (max-width: 1024px) {
+            .distract-grid { grid-template-columns: repeat(3, 1fr); }
+            .about-org { grid-template-columns: 1fr; gap: 32px; }
+            .about-org img { max-height: 300px; }
+        }
+        @media (max-width: 820px) {
+            section { padding: 60px 20px; }
+            header { padding: 16px 20px; }
+            .nav-menu { display: none; }
+            .hero-live { min-height: auto; padding: 100px 16px 40px; }
+            .live-player { border-radius: var(--radius-sm); }
+            .channels { grid-template-columns: 1fr; gap: 12px; }
+            .channel-btn { padding: 16px; }
+            .schedule-card { flex: 0 0 calc(100% - 20px); }
+            .team-row { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+            .team-photo { margin: 0 auto; }
+            .distract-grid { grid-template-columns: 1fr; }
+            .partners-block { padding: 24px; }
+            .partners-logos { grid-template-columns: repeat(3, 1fr); }
+            .partners-logos--gen { flex-direction: column; }
+            .partners-logos--gen .partner-logo { width: 100%; height: 100px; }
+            .banner-slide { width: 85%; }
+            .banner-slide .banner-content h3 { font-size: 1.3rem; }
+            .banner-slide .banner-content p { font-size: 0.95rem; }
+        }
+        @media (max-width: 520px) {
+            .section-title { font-size: 1.6rem; margin-bottom: 32px; }
+            .partners-logos { grid-template-columns: repeat(2, 1fr); }
+            .schedule-container { padding-left: 0; }
+            .schedule-container::before { display: none; }
+            .schedule-marker { display: none; }
+            .schedule-content { padding: 20px; }
+            .footer-nav { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header>
+    <div class="header-logo">
+        <img src="logo-rec.png" alt="РЭЦ">
+    </div>
+    <ul class="nav-menu">
+        <li><a href="#live">Трансляция</a></li>
+        <li><a href="#schedule">Расписание</a></li>
+        <li><a href="#program">Программа</a></li>
+        <li><a href="#partners">Партнёры</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#live" class="nav-btn">Смотреть эфир</a></li>
+    </ul>
+</header>
+
+<!-- КОНТЕЙНЕР ДЛЯ ДИНАМИЧЕСКИХ БЛОКОВ -->
+<main id="mainContent"></main>
+
+<!-- ФУТТЕР -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo"><img src="logo-rec.png" alt="РЭЦ"></div>
+        <ul class="footer-nav">
+            <li><a href="#live">Трансляция</a></li>
+            <li><a href="#schedule">Расписание</a></li>
+            <li><a href="#partners">Партнёры</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="footer-bottom">© Российский экспортный центр, 2025</div>
+    </div>
+</footer>
+
+<script>
+/* ================= ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ================= */
+let siteData = null;
+let activeChannel = 0;
+
+/* ================= ЗАГРУЗКА ДАННЫХ ================= */
+async function loadData() {
+    try {
+        const response = await fetch('/data/site.json');
+        if (!response.ok) throw new Error('Файл данных не найден');
+        
+        const rawText = await response.text();
+        siteData = JSON.parse(rawText);
+
+        // Проверка, что структура соответствует ожиданиям CMS
+        if (!siteData.link_main && !siteData.link_hall1) {
+            console.warn('Данные загружены, но ссылки пусты. Это нормально для первого запуска.');
+        }
+
+        // Преобразуем section_order
+        if (siteData.section_order && Array.isArray(siteData.section_order)) {
+            siteData.sectionOrder = siteData.section_order.map(item => item.id || item);
+        } else {
+            siteData.sectionOrder = ["live", "schedule", "program", "partners", "distract", "useful", "about", "team", "faq"];
+        }
+
+        renderPage();
+    } catch (error) {
+        console.error('Ошибка данных:', error);
+        // Вместо alert, который бесит, показываем аккуратное сообщение в консоли
+        document.getElementById('mainContent').innerHTML = `
+            <div style="padding: 100px 20px; text-align: center; color: #6C757D;">
+                <h2>Идёт обновление данных</h2>
+                <p>Пожалуйста, обновите страницу через минуту.</p>
+            </div>
+        `;
+    }
+}
+
+/* ================= ФУНКЦИИ РЕНДЕРА ================= */
+function getLiveHTML() {
+    return `
+    <div class="hero-live" id="live">
+        <div class="hero-live-inner">
+            <div class="live-player">
+                <iframe id="liveFrame" src="${siteData.link_main}" allowfullscreen></iframe>
+            </div>
+            <div class="channels" id="channels">
+                <button class="channel-btn active" data-channel="0">
+                    <div class="channel-title">Основная сцена</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+                <button class="channel-btn" data-channel="1">
+                    <div class="channel-title">Зал 1</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+                <button class="channel-btn" data-channel="2">
+                    <div class="channel-title">Зал 2</div>
+                    <div class="channel-time">—</div>
+                    <div class="channel-topic">—</div>
+                </button>
+            </div>
+        </div>
+    </div>`;
+}
+
+function getScheduleHTML() {
+    return `
+    <section class="schedule-section" id="schedule">
+        <h2 class="section-title">Расписание</h2>
+        <div class="schedule-scroll" id="scheduleScroll"></div>
+    </section>`;
+}
+
+function getProgramHTML() {
+    return `
+    <section id="program">
+        <h2 class="section-title">Программа</h2>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="0">Основная сцена</button>
+            <button class="tab-btn" data-tab="1">Зал 1</button>
+            <button class="tab-btn" data-tab="2">Зал 2</button>
+        </div>
+        <div class="schedule-container" id="programList"></div>
+    </section>`;
+}
+
+function getPartnersHTML() {
+    return `
+    <section id="partners">
+        <h2 class="section-title">Партнёры</h2>
+        <div class="partners-stack">
+            <div class="partners-block glass">
+                <h3>Генеральные партнёры</h3>
+                <div class="partners-logos partners-logos--gen">
+                    <div class="partner-logo"><img src="mec.jpg" alt="МЭЦ"></div>
+                    <div class="partner-logo"><img src="minec.png" alt="Минэк"></div>
+                    <div class="partner-logo"><img src="mos.png" alt="МОС"></div>
+                </div>
+            </div>
+            <div class="partners-block glass">
+                <h3>Партнёры</h3>
+                <div class="partners-logos" id="partnersLogos"></div>
+            </div>
+        </div>
+    </section>`;
+}
+
+function getDistractHTML() {
+    return `
+    <section id="distract">
+        <h2 class="section-title">Отвлекись</h2>
+        <div class="distract-grid">
+            <a class="distract-card distract-card--image" href="export-by-face.html">
+                <img src="postcard-banner.jpg" alt="Открытка с конференции">
+                <span>Открытка</span>
+            </a>
+            <a class="distract-card" href="marketplace-test.html">
+                <div class="distract-emoji">📝</div>
+                <span>Тест инструментов менеджера маркетплейсов</span>
+            </a>
+            <a class="distract-card" href="export-wall.html">
+                <div class="distract-emoji">🗒️</div>
+                <span>Стена экспортного плача</span>
+            </a>
+        </div>
+    </section>`;
+}
+
+function getUsefulHTML() {
+    const images = [siteData.banner_img1, siteData.banner_img2, siteData.banner_img3];
+    const links = [siteData.banner_link1, siteData.banner_link2, siteData.banner_link3];
+    const titles = ['Онлайн-помощник по маркетплейсам', 'Национальные магазины РЭЦ', 'Портал «Электронная торговля»'];
+    const texts = [
+        'Подбор площадки, расчёт логистики и пошаговый план выхода на маркетплейсы.',
+        'Ваш товар — на витринах за рубежом. Готовые каналы продаж в 20+ странах.',
+        'База знаний, чек-листы и кейсы экспортёров. Всё об e-commerce.'
+    ];
+    
+    let bannersHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const img = images[i];
+        const bgStyle = img ? `background-image: url('${img}');` : '';
+        const posClass = i === 0 ? 'pos-center' : (i === 1 ? 'pos-right' : 'pos-hidden');
+        bannersHTML += `
+        <div class="banner-slide bg-${i+1} ${posClass}" data-index="${i}" data-link="${links[i]}" style="${bgStyle}">
+            ${img ? '<div class="banner-overlay"></div>' : ''}
+            <div class="banner-content">
+                <h3>${titles[i]}</h3>
+                <p>${texts[i]}</p>
+            </div>
+        </div>`;
+    }
+    return `
+    <section class="useful-section" id="useful">
+        <h2 class="section-title">Вам будет полезно</h2>
+        <div class="useful-carousel" id="usefulCarousel">${bannersHTML}</div>
+    </section>`;
+}
+
+function getAboutHTML() {
+    return `
+    <section id="about">
+        <h2 class="section-title">Об организаторе</h2>
+        <div class="about-org">
+            <img src="photo2025.jpg" alt="РЭЦ">
+            <p>
+                Российский экспортный центр (РЭЦ) — государственный институт поддержки экспорта, 
+                созданный для того, чтобы российские компании выходили на внешние рынки быстрее, 
+                дешевле и с меньшими рисками. РЭЦ объединяет финансовые, страховые, 
+                информационные и образовательные инструменты: от субсидирования логистики 
+                и сертификации до поиска партнёров и продвижения на маркетплейсах. 
+                Мы работаем с малым, средним и крупным бизнесом по всей стране — от Калининграда 
+                до Владивостока, помогая превращать «хочу экспортировать» в «экспортирую».
+            </p>
+        </div>
+    </section>`;
+}
+
+function getTeamHTML() {
+    const team = [
+        { name: "Анна Иванова", desc: "Руководитель проекта. Отвечает за стратегию мероприятия и координацию всех потоков. В РЭЦ 6 лет, до этого — в международном маркетинге." },
+        { name: "Дмитрий Соколов", desc: "Технический директор трансляции. Отвечает за стриминг, оборудование и бесперебойную работу трёх залов. Провёл 200+ онлайн-мероприятий." },
+        { name: "Мария Петрова", desc: "Контент-менеджер. Собирает программу, работает со спикерами и готовит материалы. Любит превращать сложные темы в понятные тезисы." },
+        { name: "Игорь Кузнецов", desc: "PR и коммуникации. Отвечает за информационных партнёров, соцсети и медиа-поддержку. Считает, что хороший экспорт начинается с хорошего сторителлинга." },
+        { name: "Ольга Смирнова", desc: "Куратор партнёров и гостей. Помогает участникам находить нужные контакты, а партнёрам — аудиторию. В РЭЦ с 2018 года." }
+    ];
+    let listHTML = '';
+    team.forEach((t, i) => {
+        listHTML += `
+        <div class="team-row">
+            <img class="team-photo" src="buddy.png" alt="Участник ${i+1}">
+            <div class="team-text">
+                <h4>${t.name}</h4>
+                <p>${t.desc}</p>
+            </div>
+        </div>`;
+    });
+    return `
+    <section id="team">
+        <h2 class="section-title">Наша команда</h2>
+        <div class="team-list">${listHTML}</div>
+    </section>`;
+}
+
+function getFAQHTML() {
+    return `
+    <section id="faq">
+        <h2 class="section-title">Ответы на вопросы</h2>
+        <div class="faq-wrap">
+            <div class="faq-item">
+                <div class="faq-question">Как получить доступ к трансляции? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Трансляция доступна на этой странице в день мероприятия. Авторизация не требуется — достаточно открыть страницу.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Будут ли записи сессий? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Да, записи всех сессий будут опубликованы через 24 часа после мероприятия.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Как стать партнёром мероприятия? <span class="faq-icon">▾</span></div>
+                <div class="faq-answer">Напишите на партнёры@example.ru — мы ответим в течение двух рабочих дней.</div>
+            </div>
+        </div>
+    </section>`;
+}
+
+const SECTION_RENDERERS = {
+    "live": getLiveHTML,
+    "schedule": getScheduleHTML,
+    "program": getProgramHTML,
+    "partners": getPartnersHTML,
+    "distract": getDistractHTML,
+    "useful": getUsefulHTML,
+    "about": getAboutHTML,
+    "team": getTeamHTML,
+    "faq": getFAQHTML
+};
+
+/* ================= ИНИЦИАЛИЗАЦИЯ ================= */
+function renderPage() {
+    const main = document.getElementById('mainContent');
+    main.innerHTML = '';
+    siteData.sectionOrder.forEach(sectionId => {
+        if (SECTION_RENDERERS[sectionId]) {
+            main.innerHTML += SECTION_RENDERERS[sectionId]();
+        }
+    });
+    bindEvents();
+}
+
+function bindEvents() {
+    // Кнопки каналов
+    document.querySelectorAll(".channel-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".channel-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeChannel = Number(btn.dataset.channel);
+            const links = [siteData.link_main, siteData.link_hall1, siteData.link_hall2];
+            document.getElementById("liveFrame").src = links[activeChannel];
+            renderSchedule(activeChannel);
+            updateChannelButtons();
+        });
+    });
+
+    // Табы программы
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProgram(Number(btn.dataset.tab));
+        });
+    });
+
+    // Карусель
+    const carousel = document.getElementById("usefulCarousel");
+    if (carousel) {
+        const slides = Array.from(carousel.querySelectorAll(".banner-slide"));
+        let currentSlide = 0;
+        function updateCarousel() {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("pos-center", "pos-left", "pos-right", "pos-hidden");
+                let diff = i - currentSlide;
+                if (diff === -2) diff = 1;
+                if (diff === 2) diff = -1;
+                if (diff === 0) slide.classList.add("pos-center");
+                else if (diff === -1) slide.classList.add("pos-left");
+                else if (diff === 1) slide.classList.add("pos-right");
+                else slide.classList.add("pos-hidden");
+            });
+        }
+        slides.forEach((slide) => {
+            slide.addEventListener("click", () => {
+                const idx = Number(slide.dataset.index);
+                if (idx === currentSlide) {
+                    window.open(slide.dataset.link, "_blank");
+                } else {
+                    currentSlide = idx;
+                    updateCarousel();
+                }
+            });
+        });
+        updateCarousel();
+    }
+
+    // FAQ
+    document.querySelectorAll(".faq-question").forEach((q) => {
+        q.addEventListener("click", () => {
+            q.parentElement.classList.toggle("active");
+        });
+    });
+
+    // Партнёры (остальные)
+    const otherPartners = [
+        "Bonanza.png", "Americanas.png", "Ananas.png", "App Store.png", 
+        "ArchiEXPO.png", "Archiproducts.png", "Aukro.png", "Averest.com.png",
+        "AWS Marketplace.png", "Bandcamp.png", "Barnes and noble.png", "beIN.png",
+        "Best buy.png", "Biblio com.png", "Bili.png", "Bobbie.de.png",
+        "Bobshop-logo.png", "Bol.png"
+    ];
+    const pLogos = document.getElementById("partnersLogos");
+    if (pLogos) {
+        pLogos.innerHTML = '';
+        otherPartners.forEach(src => {
+            const div = document.createElement("div");
+            div.className = "partner-logo";
+            div.innerHTML = `<img src="${src}" alt="Партнёр" loading="lazy">`;
+            pLogos.appendChild(div);
+        });
+    }
+
+    // Инициализация расписания
+    renderSchedule(activeChannel);
+    renderProgram(0);
+    enableDragScroll(document.getElementById("scheduleScroll"));
+    updateChannelButtons();
+    setInterval(updateChannelButtons, 30000);
+}
+
+/* ================= ЛОГИКА ================= */
+function timeToMinutes(t) {
+    const [h, m] = t.split(":").map(Number);
+    return h * 60 + m;
+}
+
+function findCurrentSession(channelIndex) {
+    const now = new Date();
+    const cur = now.getHours() * 60 + now.getMinutes();
+    const list = siteData.schedule[channelIndex] || [];
+    for (const s of list) {
+        const start = timeToMinutes(s.start);
+        const end = timeToMinutes(s.end);
+        if (cur >= start && cur < end) return s;
+    }
+    return null;
+}
+
+function updateChannelButtons() {
+    document.querySelectorAll(".channel-btn").forEach((btn) => {
+        const idx = Number(btn.dataset.channel);
+        const timeEl = btn.querySelector(".channel-time");
+        const topicEl = btn.querySelector(".channel-topic");
+        const session = findCurrentSession(idx);
+        if (session) {
+            timeEl.textContent = `${session.start} – ${session.end}`;
+            topicEl.textContent = session.title;
+        } else {
+            timeEl.textContent = "Нет активной сессии";
+            topicEl.textContent = "Смотрите расписание ниже";
+        }
+    });
+}
+
+function renderSchedule(channelIndex) {
+    const wrap = document.getElementById("scheduleScroll");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    const list = siteData.schedule[channelIndex] || [];
+    list.forEach((s) => {
+        const card = document.createElement("div");
+        card.className = "schedule-card";
+        card.innerHTML = `
+            <div class="schedule-card-time">${s.start} – ${s.end}</div>
+            <div class="schedule-card-title">${s.title}</div>
+            ${s.sub ? `<div class="schedule-card-sub">${s.sub}</div>` : ""}
+        `;
+        wrap.appendChild(card);
+    });
+}
+
+function renderProgram(channelIndex) {
+    const wrap = document.getElementById("programList");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    (siteData.schedule[channelIndex] || []).forEach((s) => {
+        const item = document.createElement("div");
+        item.className = "schedule-item";
+        item.innerHTML = `
+            <div class="schedule-marker"></div>
+            <div class="schedule-content">
+                <div class="schedule-time">${s.start} – ${s.end}</div>
+                <div class="schedule-title">${s.title}</div>
+            </div>
+        `;
+        wrap.appendChild(item);
+    });
+}
+
+function enableDragScroll(el) {
+    if (!el) return;
+    let isDown = false, startX, scrollLeft;
+    el.addEventListener("mousedown", (e) => {
+        isDown = true;
+        el.classList.add("dragging");
+        startX = e.pageX - el.offsetLeft;
+        scrollLeft = el.scrollLeft;
+    });
+    el.addEventListener("mouseleave", () => { isDown = false; el.classList.remove("dragging"); });
+    el.addEventListener("mouseup", () => { isDown = false; el.classList.remove("dragging"); });
+    el.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - el.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        el.scrollLeft = scrollLeft - walk;
+    });
+}
+
+/* ================= СТАРТ ================= */
+document.addEventListener("DOMContentLoaded", loadData);
+</script>
+</body>
+</html>
