@@ -662,26 +662,34 @@ let activeChannel = 0;
 /* ================= ЗАГРУЗКА ДАННЫХ ================= */
 async function loadData() {
     try {
-        const response = await fetch('data/site.json');
-        if (!response.ok) throw new Error('Ошибка загрузки данных');
-        siteData = await response.json();
+        const response = await fetch('/data/site.json');
+        if (!response.ok) throw new Error('Файл данных не найден');
+        
+        const rawText = await response.text();
+        siteData = JSON.parse(rawText);
 
-        // Преобразуем section_order в массив ID
-        if (siteData.section_order && siteData.section_order.length > 0 && siteData.section_order[0].id) {
-            siteData.sectionOrder = siteData.section_order.map(item => item.id);
+        // Проверка, что структура соответствует ожиданиям CMS
+        if (!siteData.link_main && !siteData.link_hall1) {
+            console.warn('Данные загружены, но ссылки пусты. Это нормально для первого запуска.');
+        }
+
+        // Преобразуем section_order
+        if (siteData.section_order && Array.isArray(siteData.section_order)) {
+            siteData.sectionOrder = siteData.section_order.map(item => item.id || item);
         } else {
             siteData.sectionOrder = ["live", "schedule", "program", "partners", "distract", "useful", "about", "team", "faq"];
         }
 
-        // Приводим расписание к формату объекта (если пришло строкой)
-        if (typeof siteData.schedule === 'string') {
-            siteData.schedule = JSON.parse(siteData.schedule);
-        }
-
         renderPage();
     } catch (error) {
-        console.error('Не удалось загрузить данные:', error);
-        alert('Ошибка загрузки данных сайта. Пожалуйста, обновите страницу.');
+        console.error('Ошибка данных:', error);
+        // Вместо alert, который бесит, показываем аккуратное сообщение в консоли
+        document.getElementById('mainContent').innerHTML = `
+            <div style="padding: 100px 20px; text-align: center; color: #6C757D;">
+                <h2>Идёт обновление данных</h2>
+                <p>Пожалуйста, обновите страницу через минуту.</p>
+            </div>
+        `;
     }
 }
 
