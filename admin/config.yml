@@ -3,8 +3,8 @@ backend:
   repo: nikigeus/EO-26 # <-- ОБЯЗАТЕЛЬНО ЗАМЕНИТЕ
   branch: main
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "" 
+public_folder: ""
 
 collections:
   - name: "settings"
