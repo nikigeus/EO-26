@@ -1,16 +1,11 @@
-# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 backend:
   name: github
   repo: nikigeus/EO-26
   branch: main
 
-# Картинки сохраняются в корень репозитория и доступны по корневому пути
-media_folder: ""
-public_folder: ""
-
-# Критически важная настройка: не сохранять пустые необязательные поля как null
-output:
-  omit_empty_optional_fields: true
+# Картинки будут загружаться в папку images/uploads
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "settings"
@@ -20,41 +15,20 @@ collections:
         label: "Общие настройки"
         file: "data/site.json"
         fields:
-          # ===== ССЫЛКИ НА ТРАНСЛЯЦИИ =====
-          - { label: "Ссылка: Основная сцена (embed)", name: "link_main", widget: "string" }
+          - { label: "Ссылка: Основная сцена", name: "link_main", widget: "string" }
           - { label: "Ссылка: Зал 1", name: "link_hall1", widget: "string" }
           - { label: "Ссылка: Зал 2", name: "link_hall2", widget: "string" }
-
-          # ===== ССЫЛКИ НА БАННЕРЫ =====
-          - { label: "Ссылка: Баннер 1 (Онлайн-помощник)", name: "banner_link1", widget: "string" }
-          - { label: "Ссылка: Баннер 2 (Национальные магазины)", name: "banner_link2", widget: "string" }
-          - { label: "Ссылка: Баннер 3 (Электронная торговля)", name: "banner_link3", widget: "string" }
-
-          # ===== КАРТИНКИ БАННЕРОВ =====
+          - { label: "Ссылка: Баннер 1", name: "banner_link1", widget: "string" }
+          - { label: "Ссылка: Баннер 2", name: "banner_link2", widget: "string" }
+          - { label: "Ссылка: Баннер 3", name: "banner_link3", widget: "string" }
           - { label: "Картинка: Баннер 1", name: "banner_img1", widget: "image", required: false }
           - { label: "Картинка: Баннер 2", name: "banner_img2", widget: "image", required: false }
           - { label: "Картинка: Баннер 3", name: "banner_img3", widget: "image", required: false }
-
-          # ===== ПОРЯДОК СЕКЦИЙ =====
           - label: "Порядок секций"
             name: "section_order"
             widget: "list"
             fields:
-              - label: "ID секции"
-                name: "id"
-                widget: "select"
-                options:
-                  - { label: "Трансляция", value: "live" }
-                  - { label: "Расписание (лента)", value: "schedule" }
-                  - { label: "Программа (таймлайн)", value: "program" }
-                  - { label: "Партнёры", value: "partners" }
-                  - { label: "Отвлекись", value: "distract" }
-                  - { label: "Вам будет полезно", value: "useful" }
-                  - { label: "Об организаторе", value: "about" }
-                  - { label: "Наша команда", value: "team" }
-                  - { label: "FAQ", value: "faq" }
-
-          # ===== РАСПИСАНИЕ =====
+              - { label: "ID секции", name: "id", widget: "select", options: ["live", "schedule", "program", "partners", "distract", "useful", "about", "team", "faq"] }
           - label: "Расписание"
             name: "schedule"
             widget: "object"
@@ -63,23 +37,23 @@ collections:
                 name: "0"
                 widget: "list"
                 fields:
-                  - { label: "Начало (ЧЧ:ММ)", name: "start", widget: "string" }
-                  - { label: "Конец (ЧЧ:ММ)", name: "end", widget: "string" }
-                  - { label: "Тема сессии", name: "title", widget: "string" }
-                  - { label: "Подпись (опционально)", name: "sub", widget: "string", required: false }
+                  - { label: "Начало", name: "start", widget: "string" }
+                  - { label: "Конец", name: "end", widget: "string" }
+                  - { label: "Тема", name: "title", widget: "string" }
+                  - { label: "Подпись", name: "sub", widget: "string", required: false }
               - label: "Зал 1"
                 name: "1"
                 widget: "list"
                 fields:
-                  - { label: "Начало (ЧЧ:ММ)", name: "start", widget: "string" }
-                  - { label: "Конец (ЧЧ:ММ)", name: "end", widget: "string" }
-                  - { label: "Тема сессии", name: "title", widget: "string" }
-                  - { label: "Подпись (опционально)", name: "sub", widget: "string", required: false }
+                  - { label: "Начало", name: "start", widget: "string" }
+                  - { label: "Конец", name: "end", widget: "string" }
+                  - { label: "Тема", name: "title", widget: "string" }
+                  - { label: "Подпись", name: "sub", widget: "string", required: false }
               - label: "Зал 2"
                 name: "2"
                 widget: "list"
                 fields:
-                  - { label: "Начало (ЧЧ:ММ)", name: "start", widget: "string" }
-                  - { label: "Конец (ЧЧ:ММ)", name: "end", widget: "string" }
-                  - { label: "Тема сессии", name: "title", widget: "string" }
-                  - { label: "Подпись (опционально)", name: "sub", widget: "string", required: false }
+                  - { label: "Начало", name: "start", widget: "string" }
+                  - { label: "Конец", name: "end", widget: "string" }
+                  - { label: "Тема", name: "title", widget: "string" }
+                  - { label: "Подпись", name: "sub", widget: "string", required: false }
