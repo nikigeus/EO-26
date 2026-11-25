@@ -3,9 +3,9 @@ backend:
   repo: nikigeus/EO-26
   branch: main
 
-# Картинки будут загружаться в папку images/uploads
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+# ВСЕ картинки хранятся в папке images
+media_folder: "images"
+public_folder: "/images"
 
 collections:
   - name: "settings"
@@ -15,20 +15,29 @@ collections:
         label: "Общие настройки"
         file: "data/site.json"
         fields:
+          # Ссылки на трансляции
           - { label: "Ссылка: Основная сцена", name: "link_main", widget: "string" }
           - { label: "Ссылка: Зал 1", name: "link_hall1", widget: "string" }
           - { label: "Ссылка: Зал 2", name: "link_hall2", widget: "string" }
+
+          # Ссылки на баннеры
           - { label: "Ссылка: Баннер 1", name: "banner_link1", widget: "string" }
           - { label: "Ссылка: Баннер 2", name: "banner_link2", widget: "string" }
           - { label: "Ссылка: Баннер 3", name: "banner_link3", widget: "string" }
+
+          # Картинки баннеров
           - { label: "Картинка: Баннер 1", name: "banner_img1", widget: "image", required: false }
           - { label: "Картинка: Баннер 2", name: "banner_img2", widget: "image", required: false }
           - { label: "Картинка: Баннер 3", name: "banner_img3", widget: "image", required: false }
+
+          # Порядок секций
           - label: "Порядок секций"
             name: "section_order"
             widget: "list"
             fields:
               - { label: "ID секции", name: "id", widget: "select", options: ["live", "schedule", "program", "partners", "distract", "useful", "about", "team", "faq"] }
+
+          # Расписание
           - label: "Расписание"
             name: "schedule"
             widget: "object"
