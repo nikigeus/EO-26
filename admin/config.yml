@@ -1,10 +1,16 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 backend:
   name: github
-  repo: nikigeus/EO-26 # <-- ОБЯЗАТЕЛЬНО ЗАМЕНИТЕ
+  repo: nikigeus/EO-26
   branch: main
 
-media_folder: "" 
+# Картинки сохраняются в корень репозитория и доступны по корневому пути
+media_folder: ""
 public_folder: ""
+
+# Критически важная настройка: не сохранять пустые необязательные поля как null
+output:
+  omit_empty_optional_fields: true
 
 collections:
   - name: "settings"
@@ -15,7 +21,7 @@ collections:
         file: "data/site.json"
         fields:
           # ===== ССЫЛКИ НА ТРАНСЛЯЦИИ =====
-          - { label: "Ссылка: Основная сцена", name: "link_main", widget: "string" }
+          - { label: "Ссылка: Основная сцена (embed)", name: "link_main", widget: "string" }
           - { label: "Ссылка: Зал 1", name: "link_hall1", widget: "string" }
           - { label: "Ссылка: Зал 2", name: "link_hall2", widget: "string" }
 
